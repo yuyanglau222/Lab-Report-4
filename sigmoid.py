@@ -16,13 +16,13 @@ st.set_page_config(
 # Sidebar: Controls & Parameters
 # ---------------------------------------------------------
 st.sidebar.subheader("Curve")
-test_x = st.sidebar.slider("Input value x", min_value=-6.0, max_value=6.0, value=0.0, step=0.05)
+test_x = st.sidebar.slider("Input value x", min_value=-6.0, max_value=6.0, value=1.0, step=0.05)
 
 st.sidebar.subheader("Neural Network Demo")
 st.sidebar.caption("Dataset")
 dataset_type = st.sidebar.selectbox("Dataset", ["Moons", "Circles"], label_visibility="collapsed")
 samples = st.sidebar.slider("Samples", min_value=100, max_value=1000, value=300, step=50)
-noise = st.sidebar.slider("Noise", min_value=0.00, max_value=0.50, value=0.20, step=0.01)
+noise = st.sidebar.slider("Noise", min_value=-1.00, max_value=1.00, value=0.20, step=0.01)
 
 st.sidebar.subheader("Model Parameters")
 hidden_input = st.sidebar.text_input("Hidden layer sizes (e.g. 16,16)", value="16,16")
