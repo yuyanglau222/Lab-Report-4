@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="ReLU Visualizer", page_icon="📈", layout="centered")
 
-st.title("📈 1. Rectified Linear Unit (ReLU)")
+# Removed "1." from title
+st.title("📈 Rectified Linear Unit (ReLU)")
 st.markdown(
     """
     **Mathematical Definition:**
@@ -35,16 +36,20 @@ col_m2.metric(f"Derivative: f'({test_z})", f"{val_grad:.1f}")
 
 # Plot
 fig, ax = plt.subplots(figsize=(8, 4.5))
-ax.plot(z, relu_out, label=r"ReLU: $f(z) = \max(0, z)$", color="#1f77b4", linewidth=2.5)
+ax.plot(z, relu_out, label=r"ReLU: $\max(0, z)$", color="#1f77b4", linewidth=2.5)
 ax.plot(z, relu_grad, label=r"Derivative: $f'(z)$", color="#d62728", linestyle="--", linewidth=1.8)
-ax.scatter([test_z], [val_out], color="black", s=50, zorder=5, label=f"Point ({test_z}, {val_out})")
+ax.scatter([test_z], [val_out], color="black", s=40, zorder=5, label=f"Point ({test_z:.1f}, {val_out:.2f})")
+
 ax.axhline(0, color="gray", linewidth=0.8, linestyle=":")
 ax.axvline(0, color="gray", linewidth=0.8, linestyle=":")
 ax.set_xlabel("Input ($z$)")
 ax.set_ylabel("Activation / Gradient")
 ax.set_title("ReLU Function and First Derivative")
 ax.grid(True, linestyle="--", alpha=0.5)
-ax.legend()
+
+# Compact, non-intrusive legend
+ax.legend(loc="upper left", fontsize=9, framealpha=0.85)
+
 st.pyplot(fig)
 
 with st.expander("Analysis & Properties"):
