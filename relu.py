@@ -16,7 +16,7 @@ st.set_page_config(
 # Sidebar: Controls & Parameters
 # ---------------------------------------------------------
 st.sidebar.subheader("Curve")
-test_x = st.sidebar.slider("Input value x", min_value=-5.0, max_value=5.0, value=-2.75, step=0.05)
+test_x = st.sidebar.slider("Input value x", min_value=-6.0, max_value=6.0, value=-2.75, step=0.05)
 
 st.sidebar.subheader("Neural Network Demo")
 st.sidebar.caption("Dataset")
@@ -76,39 +76,40 @@ with st.container(border=True):
 st.divider()
 
 # ---------------------------------------------------------
-# Section 1: Activation Function Curve & Derivative Plot
+# Section 1: Activation Function Curve & First Derivative Plot (Big Square)
 # ---------------------------------------------------------
 st.subheader("1. Activation Function Curve & First Derivative")
 
-# Fixed plotting domain encompassing the interactive point
 plot_limit = max(5.0, abs(test_x) + 1.0)
 x_vals = np.linspace(-plot_limit, plot_limit, 500)
 relu_vals = np.maximum(0, x_vals)
 relu_grads = np.where(x_vals > 0, 1.0, 0.0)
 
-fig_act, ax_act = plt.subplots(figsize=(7, 3.2))
-ax_act.plot(x_vals, relu_vals, label=r"ReLU: $\max(0, x)$", color="#1f77b4", linewidth=2.0)
-ax_act.plot(x_vals, relu_grads, label=r"Derivative: $f'(x)$", color="#d62728", linestyle="--", linewidth=1.5)
-ax_act.scatter([test_x], [point_out], color="black", s=35, zorder=5, label=f"Point ({test_x:.2f}, {point_out:.2f})")
+# Square 6x6 figure size with tight framing
+fig_act, ax_act = plt.subplots(figsize=(6, 6))
+ax_act.plot(x_vals, relu_vals, label=r"ReLU: $\max(0, x)$", color="#1f77b4", linewidth=2.2)
+ax_act.plot(x_vals, relu_grads, label=r"Derivative: $f'(x)$", color="#d62728", linestyle="--", linewidth=1.6)
+ax_act.scatter([test_x], [point_out], color="black", s=45, zorder=5, label=f"Point ({test_x:.2f}, {point_out:.2f})")
 
 ax_act.axhline(0, color="gray", linewidth=0.8, linestyle=":")
 ax_act.axvline(0, color="gray", linewidth=0.8, linestyle=":")
 ax_act.set_xlim(-plot_limit, plot_limit)
-ax_act.set_ylim(-0.5, plot_limit * 0.9 + 0.5)
+ax_act.set_ylim(-0.5, plot_limit + 0.5)
 
-ax_act.set_xlabel("Input ($x$)", fontsize=10)
-ax_act.set_ylabel("Activation / Gradient", fontsize=10)
-ax_act.set_title("ReLU Function and First Derivative", fontsize=11)
+ax_act.set_xlabel("Input ($x$)", fontsize=11)
+ax_act.set_ylabel("Activation / Gradient", fontsize=11)
+ax_act.set_title("ReLU Function and First Derivative", fontsize=12, pad=10)
 ax_act.grid(True, linestyle="--", alpha=0.5)
 
+# Strictly constrained, fixed-size legend
 ax_act.legend(
     loc="upper left",
-    prop={"size": 8.5},
+    fontsize=9,
     markerscale=0.7,
-    handlelength=1.5,
-    borderpad=0.35,
-    labelspacing=0.25,
-    framealpha=0.85
+    handlelength=1.6,
+    borderpad=0.4,
+    labelspacing=0.3,
+    framealpha=0.9
 )
 fig_act.tight_layout()
 
@@ -127,7 +128,6 @@ st.write(
     "Every hidden layer uses the **ReLU** activation, so the decision boundary below shows what this activation lets the network learn."
 )
 
-# Dataset generation
 if dataset_type == "Moons":
     X, y = make_moons(n_samples=samples, noise=noise, random_state=int(random_seed))
 else:
@@ -136,7 +136,6 @@ else:
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# MLP Classifier training
 clf = MLPClassifier(
     hidden_layer_sizes=hidden_layer_sizes,
     activation="relu",
@@ -148,7 +147,6 @@ clf = MLPClassifier(
 clf.fit(X_scaled, y)
 acc = clf.score(X_scaled, y)
 
-# Mesh grid for decision boundary
 x_pad = 0.5
 y_pad = 0.5
 x_min, x_max = X_scaled[:, 0].min() - x_pad, X_scaled[:, 0].max() + x_pad
@@ -156,7 +154,6 @@ y_min, y_max = X_scaled[:, 1].min() - y_pad, X_scaled[:, 1].max() + y_pad
 xx, yy = np.meshgrid(np.linspace(x_min, x_max, 300), np.linspace(y_min, y_max, 300))
 Z = clf.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
 
-# Decision boundary plot
 fig_bound, ax_bound = plt.subplots(figsize=(6, 5))
 cmap_bg = ListedColormap(["#F0EEF8", "#E8F6F6"])
 ax_bound.contourf(xx, yy, Z, cmap=cmap_bg, alpha=0.8)
