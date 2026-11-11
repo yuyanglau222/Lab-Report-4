@@ -78,7 +78,7 @@ st.divider()
 # ---------------------------------------------------------
 # Section 1: Activation Function Curve & First Derivative Plot (Big Square)
 # ---------------------------------------------------------
-st.subheader("1. Activation Function Curve & First Derivative")
+st.subheader("1. ReLU Function Curve & First Derivative")
 
 plot_limit = max(5.0, abs(test_x) + 1.0)
 x_vals = np.linspace(-plot_limit, plot_limit, 500)
