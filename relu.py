@@ -16,7 +16,7 @@ st.set_page_config(
 # Sidebar: Controls & Parameters
 # ---------------------------------------------------------
 st.sidebar.subheader("Curve")
-test_x = st.sidebar.slider("Input value x", min_value=-6.0, max_value=6.0, value=-2.75, step=0.05)
+test_x = st.sidebar.slider("Input value x", min_value=-6.0, max_value=6.0, value=1, step=0.05)
 
 st.sidebar.subheader("Neural Network Demo")
 st.sidebar.caption("Dataset")
