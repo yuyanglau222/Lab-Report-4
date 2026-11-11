@@ -1,54 +1,122 @@
-# Lab Report 4: Neural Network Activation Functions Visualizer
+# BSD3513 Introduction to Artificial Intelligence — Lab Report 4
+**Topic:** Chapter 4: Neural Networks — Activation Functions & Decision Boundaries  
+**Institution:** Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA)
+
 ---
 
-## 📖 Overview
+## 🌐 Deployed Applications & Repository Links
 
-An activation function in an artificial neural network applies a non-linear transformation to a neuron's net linear combination:
-$$z = \mathbf{w} \cdot \mathbf{x} + b = \sum_{i=1}^n w_i x_i + b$$
+| # | Activation Function | File Name | Live Streamlit Deployment Link |
+|---|---------------------|-----------|--------------------------------|
+| **1** | **Rectified Linear Unit (ReLU)** | `relu.py` | [Launch ReLU App](https://your-relu-app.streamlit.app) |
+| **2** | **Sigmoid (Logistic)** | `sigmoid.py` | [Launch Sigmoid App](https://your-sigmoid-app.streamlit.app) |
+| **3** | **Hyperbolic Tangent (Tanh)** | `tanh.py` | [Launch Tanh App](https://your-tanh-app.streamlit.app) |
 
-Without non-linear activation functions, multi-layer networks collapse mathematically into simple linear regression models regardless of network depth. In addition, activation functions govern neuron firing and provide essential gradients ($\frac{\partial f}{\partial z}$) required by optimization algorithms during backpropagation.
+* **GitHub Repository:** [https://github.com/your-username/Lab-Report-4](https://github.com/your-username/Lab-Report-4)
 
-This interactive Streamlit web application provides visualization and mathematical analysis for three key activation functions:
+---
+
+## 📖 Project Overview
+
+An activation function in a neural network is a mathematical transformation applied to a neuron's output. It introduces non-linearity, allowing the model to acquire and depict intricate data patterns. In its absence, a multi-layer neural network collapses into a basic linear regression model, regardless of depth. Furthermore, activation functions govern neuron firing and facilitate backpropagation by providing gradients for weight optimization.
+
+This repository provides three standalone Streamlit applications corresponding to the primary activation functions evaluated:
 1. **Rectified Linear Unit (ReLU)**
 2. **Sigmoid (Logistic Function)**
 3. **Hyperbolic Tangent (Tanh)**
 
+Each application consists of two core components:
+* **Interactive Activation & Derivative Visualizer:** Dynamic calculation and curve plotting of the function alongside its first-order derivative across an adjustable input domain.
+* **Toy 2D Classification Demo:** Real-time training of a Multi-Layer Perceptron (MLP) on non-linear synthetic benchmarks (`Moons` and `Circles`) to illustrate the learned decision boundary.
+
 ---
 
-## ⚙️ Implemented Activation Functions
+## 🔬 Mathematical Formulations & Properties
 
 ### 1. Rectified Linear Unit (ReLU)
-- **Activation Function:**
-  $$f(z) = \max(0, z)$$
-- **First-Order Derivative:**
-  $$f'(z) = \begin{cases} 1 & \text{if } z > 0 \\ 0 & \text{if } z < 0 \end{cases}$$
-- **Characteristics:**
-  - Range: $[0, \infty)$
-  - Mitigates vanishing gradient issues for positive inputs ($z > 0$).
-  - Susceptible to the *Dying ReLU* problem when inputs remain negative ($z \le 0$).
+* **Equation:**
+  $$f(x) = \max(0, x)$$
+* **First Derivative:**
+  $$f'(x) = \begin{cases} 1 & x > 0 \\ 0 & x \le 0 \end{cases}$$
+* **Range:** $[0, \infty)$
+* **Key Characteristics:**
+  * Computationally efficient and simple to calculate.
+  * Avoids gradient saturation for positive activations, speeding up convergence.
+  * Prone to the *Dying ReLU* phenomenon when sustained negative updates result in a persistent zero gradient.
 
 ---
 
-### 2. Sigmoid (Logistic) Function
-- **Activation Function:**
-  $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
-- **First-Order Derivative:**
-  $$\sigma'(z) = \sigma(z) \cdot (1 - \sigma(z))$$
-- **Characteristics:**
-  - Range: $(0, 1)$
-  - Smooth, continuously differentiable curve ideal for binary classification outputs.
-  - Suffers from vanishing gradients for extreme values ($\vert{}z\vert{} > 4$) where maximum derivative reaches at most $0.25$.
+### 2. Sigmoid (Logistic Function)
+* **Equation:**
+  $$\sigma(x) = \frac{1}{1 + e^{-x}}$$
+* **First Derivative:**
+  $$\sigma'(x) = \sigma(x) \cdot (1 - \sigma(x))$$
+* **Range:** $(0, 1)$
+* **Key Characteristics:**
+  * Smooth, continuously differentiable S-curve suitable for binary probabilistic modeling.
+  * Subject to the *vanishing gradient problem* at outer ranges ($|x| > 4$) where the maximum derivative drops to $\le 0.25$.
 
 ---
 
 ### 3. Hyperbolic Tangent (Tanh)
-- **Activation Function:**
-  $$\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
-- **First-Order Derivative:**
-  $$\tanh'(z) = 1 - \tanh^2(z)$$
-- **Characteristics:**
-  - Range: $(-1, 1)$
-  - Zero-centered output, which prevents bias shifts in downstream weight updates and accelerates optimization over Sigmoid.
-  - Still vulnerable to gradient saturation and vanishing gradients at tails ($\vert{}z\vert{} > 3$).
+* **Equation:**
+  $$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
+* **First Derivative:**
+  $$\tanh'(x) = 1 - \tanh^2(x)$$
+* **Range:** $(-1, 1)$
+* **Key Characteristics:**
+  * Zero-centered output prevents directional bias shifts during gradient descent updates.
+  * Offers steeper gradients than Sigmoid (maximum gradient of $1.0$ at $x = 0$), though tail saturation remains an issue for $|x| > 3$.
 
 ---
+
+## 📁 Repository Directory Structure
+
+```text
+Lab-Report-4/
+├── relu.py              # Application 1: ReLU visualizer & MLP demo
+├── sigmoid.py           # Application 2: Sigmoid visualizer & MLP demo
+├── tanh.py              # Application 3: Tanh visualizer & MLP demo
+├── requirements.txt     # Python dependencies for Streamlit Cloud
+└── README.md            # Lab report documentation & live links
+```
+
+---
+
+## 🛠️ Local Installation & Running Instructions
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/Lab-Report-4.git
+   cd Lab-Report-4
+   ```
+
+2. **Install project dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run any of the applications independently:**
+   * To run ReLU:
+     ```bash
+     streamlit run relu.py
+     ```
+   * To run Sigmoid:
+     ```bash
+     streamlit run sigmoid.py
+     ```
+   * To run Tanh:
+     ```bash
+     streamlit run tanh.py
+     ```
+
+---
+
+## 📦 Requirements (`requirements.txt`)
+
+```text
+streamlit>=1.30.0
+numpy>=1.24.0
+matplotlib>=3.8.0
+scikit-learn>=1.3.0
+```
