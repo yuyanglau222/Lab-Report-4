@@ -8,11 +8,9 @@
 
 | # | Activation Function | File Name | Live Streamlit Deployment Link |
 |---|---------------------|-----------|--------------------------------|
-| **1** | **Rectified Linear Unit (ReLU)** | `relu.py` | (https://ai-lab-report4-relu.streamlit.app/) |
-| **2** | **Sigmoid (Logistic)** | `sigmoid.py` | [Launch Sigmoid App](https://your-sigmoid-app.streamlit.app) |
-| **3** | **Hyperbolic Tangent (Tanh)** | `tanh.py` | [Launch Tanh App](https://your-tanh-app.streamlit.app) |
-
-* **GitHub Repository:** [https://github.com/your-username/Lab-Report-4](https://github.com/your-username/Lab-Report-4)
+| **1** | **Rectified Linear Unit (ReLU)** | `relu.py` | https://ai-lab-report4-relu.streamlit.app/ |
+| **2** | **Sigmoid (Logistic)** | `sigmoid.py` | https://ai-lab-report4-sigmoid.streamlit.app/ |
+| **3** | **Hyperbolic Tangent (Tanh)** | `tanh.py` | https://ai-lab-report4-tanh.streamlit.app/ |
 
 ---
 
@@ -80,37 +78,6 @@ Lab-Report-4/
 ├── requirements.txt     # Python dependencies for Streamlit Cloud
 └── README.md            # Lab report documentation & live links
 ```
-
----
-
-## 🛠️ Local Installation & Running Instructions
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/Lab-Report-4.git
-   cd Lab-Report-4
-   ```
-
-2. **Install project dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run any of the applications independently:**
-   * To run ReLU:
-     ```bash
-     streamlit run relu.py
-     ```
-   * To run Sigmoid:
-     ```bash
-     streamlit run sigmoid.py
-     ```
-   * To run Tanh:
-     ```bash
-     streamlit run tanh.py
-     ```
-
----
 
 ## 📦 Requirements (`requirements.txt`)
 
