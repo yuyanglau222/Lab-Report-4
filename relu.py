@@ -16,9 +16,8 @@ st.set_page_config(
 # Sidebar: Controls & Parameters
 # ---------------------------------------------------------
 # Top Section: Activation Function Controls
-st.sidebar.subheader("Activation Function Inputs")
-test_x = st.sidebar.number_input("Input value (x)", value=2.0, step=0.5)
-x_range = st.sidebar.slider("Graph Domain Span (±x)", min_value=-20.0, max_value=20.0, value=6.0, step=1.0)
+st.sidebar.header("Curve")
+x_input = st.sidebar.slider("Input value x", -6.0, 6.0, 1.0, step=0.25)
 
 st.sidebar.divider()
 
