@@ -70,19 +70,25 @@ col_m1, col_m2 = st.columns(2)
 col_m1.metric("f(z) Output", f"{point_out:.4f}")
 col_m2.metric("f'(z) Gradient", f"{point_grad:.1f}")
 
-fig_act, ax_act = plt.subplots(figsize=(7, 3.2))
-ax_act.plot(z_vals, relu_vals, label=r"ReLU: $\max(0, z)$", color="#1f77b4", linewidth=2.2)
-ax_act.plot(z_vals, relu_grads, label=r"Derivative: $f'(z)$", color="#d62728", linestyle="--", linewidth=1.6)
+# Fixed-size compact plot
+fig_act, ax_act = plt.subplots(figsize=(7, 3.5))
+
+ax_act.plot(z_vals, relu_vals, label=r"ReLU: $\max(0, z)$", color="#1f77b4", linewidth=2.0)
+ax_act.plot(z_vals, relu_grads, label=r"Derivative: $f'(z)$", color="#d62728", linestyle="--", linewidth=1.5)
 ax_act.scatter([test_z], [point_out], color="black", s=35, zorder=5, label=f"Point ({test_z:.1f}, {point_out:.2f})")
+
 ax_act.axhline(0, color="gray", linewidth=0.8, linestyle=":")
 ax_act.axvline(0, color="gray", linewidth=0.8, linestyle=":")
 ax_act.set_xlim(-current_limit, current_limit)
 ax_act.set_ylim(-0.5, current_limit * 0.9 + 0.5)
-ax_act.set_xlabel("Input ($z$)")
-ax_act.set_ylabel("Activation / Gradient")
-ax_act.set_title("ReLU Function and First Derivative")
+
+ax_act.set_xlabel("Input ($z$)", fontsize=10)
+ax_act.set_ylabel("Activation / Gradient", fontsize=10)
+ax_act.set_title("ReLU Function and First Derivative", fontsize=11)
 ax_act.grid(True, linestyle="--", alpha=0.5)
-ax_act.legend(loc="upper left", fontsize=8.5, framealpha=0.85)
+
+ax_act.legend(loc="upper left", prop={'size': 8.5}, markerscale=0.7, handlelength=1.5,borderpad=0.35, labelspacing=0.25, framealpha=0.85)
+
 fig_act.tight_layout()
 st.pyplot(fig_act)
 
